@@ -26,13 +26,13 @@ export async function POST(req: NextRequest) {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create the new user
-    const newUser = new User({ email, password: hashedPassword });
+    const newUser = new User({ username,email, password: hashedPassword });
     await newUser.save();
-    console.log(newUser);
+    console.log("new User",newUser);
 
     //send verification email
     const emailResponse = await sendMail({ email, emailType: "verify", userId: newUser._id });
-    console.log(emailResponse);
+    console.log("Email Response",emailResponse);
     return NextResponse.json({ message: "User Registered Successfully !",success:true },{status:200});
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });

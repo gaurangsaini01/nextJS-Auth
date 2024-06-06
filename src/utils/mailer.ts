@@ -16,14 +16,15 @@ async function sendMail({ email, emailType, userId }: any) {
       });
     }
 
-    var transporter = nodemailer.createTransport({
-      host:process.env.HOST ,
-      port: process.env.MAIL_PORT,
+    var transport = nodemailer.createTransport({
+      host: process.env.HOST,
+      port: 2525,
       auth: {
         user: process.env.USER,
-        pass: process.env.PASS,
-      },
+        pass: process.env.PASS
+      }
     });
+
     const mailOptions = {
       from: '"Maddison Foo Koch 👻" <maddison53@ethereal.email>', // sender address
       to: email, // list of receivers
@@ -33,7 +34,7 @@ async function sendMail({ email, emailType, userId }: any) {
       or copy and paste the link below in your browser. <br> ${process.env.DOMAIN}/verifyemail?token=${hashValue}
       </p>`, // html body
     };
-    const mailResponse = await transporter.sendMail(mailOptions);
+    const mailResponse = await transport.sendMail(mailOptions);
     return mailResponse;
   } catch (err: any) {
     throw new Error(err.message);

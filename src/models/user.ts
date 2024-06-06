@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
-    userName:{
+    username:{
         type:String,
         required:true,
         unique:true
@@ -16,6 +16,10 @@ const userSchema = new mongoose.Schema({
         required:true,
     },
     isVerified:{
+        type:Boolean,
+        default:false
+    },
+    isAdmin:{
         type:Boolean,
         default:false
     },

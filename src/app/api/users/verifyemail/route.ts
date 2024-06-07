@@ -9,6 +9,7 @@ export async function POST(request: NextRequest) {
   try {
     const reqBody = await request.json();
     const { token } = reqBody;
+    console.log("Token is",token)
 
     if (!token) {
       return NextResponse.json({ error: "Token Not Found" }, { status: 400 });
@@ -31,7 +32,7 @@ export async function POST(request: NextRequest) {
     
     await user.save();
 
-    return NextResponse.json({success:true,message:"User Verified Successfully"},{status:200})
+    return NextResponse.json({success:true,message:"User Verified Successfully",user},{status:200})
 
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
